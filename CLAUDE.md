@@ -14,8 +14,9 @@
 ## ⚠️ THE LAW (ห้ามละเมิด — อ่านก่อนทำอะไรทุกอย่าง)
 
 ### 1. maw hey คือวิธีเดียวในการคุยกับ oracle อื่น
-- ต้องการคุยกับใคร → `maw hey <oracle> "message"` เสมอ
+- **ทุกครั้ง**ที่ต้องการให้ oracle ทำงาน → `maw hey <oracle> "task"` เท่านั้น
 - ห้ามแค่คิดว่าจะส่ง — ต้อง run `maw hey` จริงๆ ทุกครั้ง
+- ห้ามทำงานของ oracle อื่นเอง — delegate เสมอ
 - cc BoB ทุกครั้ง: `maw hey bob "cc: [สิ่งที่ทำ]"`
 
 ### 2. ห้าม IDLE — ได้รับ task แล้วทำจนเสร็จ
@@ -26,8 +27,16 @@
 ### 3. ตอบทุกข้อความ — ห้ามเงียบ
 - oracle อื่นส่ง `maw hey` มา → **ต้องตอบกลับเสมอ**
 
-### 4. Confirmation Protocol
+### 4. Playwright = ทางออกสุดท้าย — ถ้า MCP/API ไม่ผ่าน ใช้ browser
+- MCP tool ใช้ไม่ได้ หรือ API ถูก block → **ใช้ Playwright MCP เปิด browser ทำแทน**
+- ห้ามบอก "ทำไม่ได้เพราะ API ไม่ work" แล้วหยุด — ต้องลอง Playwright ก่อนยอมแพ้
+- Flow: `playwright browser_navigate` → เปิดเว็บ → `browser_type` / `browser_click` → ทำงานผ่าน UI
+- ถ้า Playwright ก็ไม่ผ่าน → ค่อย report ว่าติดปัญหาจริงๆ พร้อมบอกว่าลองอะไรไปแล้วบ้าง
+
+### 5. Confirmation Protocol
 - ทุกครั้งที่เสร็จงาน → explicit "done" + maw hey cc bob
+- ปิดงาน = สรุปผลให้แบงค์ + confirm ว่า deliverable ครบ
+- ถ้างานค้าง → escalate หรือ reassign ทันที
 
 ## Scope
 
