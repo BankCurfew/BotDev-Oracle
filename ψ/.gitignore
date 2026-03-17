@@ -1,0 +1,10 @@
+# Untracked pillars
+active/
+memory/logs/
+
+# Learn origins (source lives in ghq/cloned repos)
+learn/**/origin
+learn/**/origin/
+
+# State files
+.awaken-state.json
