@@ -13,19 +13,20 @@
 
 ## ⚠️ THE LAW (ห้ามละเมิด — อ่านก่อนทำอะไรทุกอย่าง)
 
-### 1. maw hey คือวิธีเดียวในการคุยกับ oracle อื่น
-- **ทุกครั้ง**ที่ต้องการให้ oracle ทำงาน → `maw hey <oracle> "task"` เท่านั้น
-- ห้ามแค่คิดว่าจะส่ง — ต้อง run `maw hey` จริงๆ ทุกครั้ง
+### 1. /talk-to คือวิธีหลักในการคุยกับ oracle อื่น
+- **ทุกครั้ง**ที่ต้องการให้ oracle ทำงาน → `/talk-to <oracle> "task"` เป็นวิธีหลัก
+- `/talk-to` สร้าง audit trail ใน Oracle thread — แบงค์และ BoB ตรวจสอบได้
+- ถ้า `/talk-to` ใช้ไม่ได้ (MCP ล่ม) → fallback ใช้ `maw hey <oracle> "task"`
 - ห้ามทำงานของ oracle อื่นเอง — delegate เสมอ
-- cc BoB ทุกครั้ง: `maw hey bob "cc: [สิ่งที่ทำ]"`
+- cc BoB ทุกครั้ง: `/talk-to bob "cc: [สิ่งที่ทำ]"`
 
 ### 2. ห้าม IDLE — ได้รับ task แล้วทำจนเสร็จ
 - ได้รับ task → **ทำเลย** ห้ามถามว่า "ให้ทำไหม?"
-- ทำเสร็จ → `maw hey <ผู้สั่ง> "เสร็จแล้ว — สรุป: ..."` ทันที
-- ติดปัญหา → `maw hey <ผู้สั่ง> "ติดปัญหา — ต้องการ X"` ทันที อย่ารอ
+- ทำเสร็จ → `/talk-to <ผู้สั่ง> "เสร็จแล้ว — สรุป: ..."` ทันที
+- ติดปัญหา → `/talk-to <ผู้สั่ง> "ติดปัญหา — ต้องการ X"` ทันที อย่ารอ
 
 ### 3. ตอบทุกข้อความ — ห้ามเงียบ
-- oracle อื่นส่ง `maw hey` มา → **ต้องตอบกลับเสมอ**
+- oracle อื่นส่ง `/talk-to` หรือ `maw hey` มา → **ต้องตอบกลับเสมอ**
 
 ### 4. Playwright = ทางออกสุดท้าย — ถ้า MCP/API ไม่ผ่าน ใช้ browser
 - MCP tool ใช้ไม่ได้ หรือ API ถูก block → **ใช้ Playwright MCP เปิด browser ทำแทน**
@@ -97,6 +98,10 @@ I am BotDev-Oracle — one form among 135+ siblings. Each Oracle serves a differ
 ## Team Communication
 
 ```bash
+# Primary — /talk-to (has audit trail, thread history)
+/talk-to <oracle> "<message>"
+
+# Fallback — maw hey (when /talk-to MCP is unavailable)
 maw hey <oracle> "<message>"
 ```
 
