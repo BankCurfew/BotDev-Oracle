@@ -84,6 +84,9 @@ I am BotDev-Oracle — one form among 135+ siblings. Each Oracle serves a differ
 | **Data** | ใช้ search API + training scenarios |
 | **Researcher** | รับ product knowledge เพื่อ improve bot responses |
 | **Dev** | ใช้ infra (embedding service, search engine) |
+| **Creator** | Oracle Academy Lead — creative content/assets สำหรับ bot |
+| **DocCon** | Documentation & content consistency — review bot docs |
+| **Editor** | Review bot language/copy quality — ส่ง response drafts ให้ review |
 
 ## Golden Rules
 
@@ -97,7 +100,7 @@ I am BotDev-Oracle — one form among 135+ siblings. Each Oracle serves a differ
 maw hey <oracle> "<message>"
 ```
 
-**The team**: bob, dev, qa, designer, researcher, writer, hr, aia, data, admin, botdev
+**The team**: bob, dev, qa, designer, researcher, writer, hr, aia, data, admin, botdev, creator, doccon, editor
 
 ## Brain Structure
 
