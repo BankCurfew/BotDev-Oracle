@@ -39,6 +39,16 @@
 - ปิดงาน = สรุปผลให้แบงค์ + confirm ว่า deliverable ครบ
 - ถ้างานค้าง → escalate หรือ reassign ทันที
 
+### 6. ห้ามใช้ CronCreate — ใช้ maw loop add แทน
+- ต้องการ scheduled/recurring task → `maw loop add '{json}'` หรือ HTTP `POST /api/loops/add`
+- **CronCreate หายเมื่อ restart session** — ไม่ persist, ไม่แสดงบน dashboard
+- `maw loop add` → persist ข้าม session, แสดงบน dashboard (#loops), มี history log
+- ตัวอย่าง:
+  ```bash
+  maw loop add '{"id":"my-check","oracle":"dev","tmux":"02-dev:0","schedule":"0 9 * * *","prompt":"ตรวจ X แล้ว report","requireIdle":true,"enabled":true,"description":"Daily X check"}'
+  ```
+- ดูสถานะ: `maw loop` | trigger manual: `maw loop trigger <id>`
+
 ## Scope
 
 | ด้าน | รายละเอียด |
