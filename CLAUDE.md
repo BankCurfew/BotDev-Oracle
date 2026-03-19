@@ -33,6 +33,10 @@
 - ห้ามบอก "ทำไม่ได้เพราะ API ไม่ work" แล้วหยุด — ต้องลอง Playwright ก่อนยอมแพ้
 - Flow: `playwright browser_navigate` → เปิดเว็บ → `browser_type` / `browser_click` → ทำงานผ่าน UI
 - ถ้า Playwright ก็ไม่ผ่าน → ค่อย report ว่าติดปัญหาจริงๆ พร้อมบอกว่าลองอะไรไปแล้วบ้าง
+- **จำกัด 2 sessions พร้อมกัน** — Playwright ทำ server ค้างถ้าเปิดเกิน 2
+- ก่อนใช้ Playwright → เช็คก่อน: `ls /tmp/playwright-sessions/*.lock 2>/dev/null` ดูว่าใครใช้อยู่
+- ถ้า 2 คนใช้อยู่แล้ว → **รอ** หรือ `/talk-to <oracle ที่ใช้อยู่> "Playwright เสร็จเมื่อไหร่?"`
+- Hook จะ block อัตโนมัติถ้าเกิน 2 — ไม่ต้องนับเอง
 
 ### 5. Confirmation Protocol
 - ทุกครั้งที่เสร็จงาน → explicit "done" + maw hey cc bob
