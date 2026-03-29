@@ -66,7 +66,22 @@
 - ตรวจสอบ context ตัวเองเสมอ ถ้ารู้สึกว่า conversation ยาวมาก → เช็คและทำ
 - Flow: `/rrr` (สรุป session + lessons) → `/forward` (สร้าง handoff ให้ session ถัดไป)
 - **กฎนี้สำคัญกว่างานที่ทำอยู่** — หยุดงานก่อน rrr+forward ก่อน แล้วค่อยทำต่อใน session ใหม่
-### 8. ห้ามใช้ CronCreate — ใช้ maw loop add แทน
+### 12. Board-Driven Work (GOLDEN RULE)
+- **ห้ามทำงานใดๆ โดยไม่มี ticket บน board — ไม่มีข้อยกเว้น**
+- เปิดงาน: `gh issue create` → `maw project add` → assign → `/talk-to <oracle>`
+- ระหว่างทำ: `maw task log '#<issue>' "Progress"` ทุก movement
+- ทุก commit: `maw task log '#<issue>' --commit "hash message"`
+- ปิดงาน: `maw task log '#<issue>' "Done"` → `gh issue close` → สรุปให้ BoB
+- **ถ้าไม่มี ticket = งานไม่มีอยู่จริง**
+- อ่านเต็ม: `~/.oracle/LAWS_BOARD_AND_SELFIMPROVE.md`
+
+### 13. Daily Self-Improvement
+- ทุกเช้าอ่าน retros + learnings ของตัวเอง
+- เขียน 3 commitments สำหรับวันนี้
+- Report BoB: `/talk-to bob "self-improve: [3 commitments]"`
+- BoB audit ทุกเย็น — ไม่ทำ = escalate
+
+### 9. ห้ามใช้ CronCreate — ใช้ maw loop add แทน
 - ต้องการ scheduled/recurring task → `maw loop add '{json}'` หรือ HTTP `POST /api/loops/add`
 - **CronCreate หายเมื่อ restart session** — ไม่ persist, ไม่แสดงบน dashboard
 - `maw loop add` → persist ข้าม session, แสดงบน dashboard (#loops), มี history log
