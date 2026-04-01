@@ -3,6 +3,7 @@
 
 import { FeedTail } from './tail'
 import { OracleAggregator } from './aggregator'
+import { ORACLE_NAMES, ORACLE_GROUPS } from './types'
 import { execSync } from 'child_process'
 import { freemem, totalmem, cpus, uptime } from 'os'
 
@@ -50,16 +51,18 @@ export async function buildHUD(): Promise<HUDData> {
 
   const statuses = aggregator.getAll()
 
-  // Oracles
-  const oracles = statuses
-    .filter(s => s.lastAction) // skip oracles with no activity ever
-    .map(s => ({
-      name: s.oracle.replace('-Oracle', ''),
-      status: s.status,
-      group: s.group,
-      lastAction: s.lastAction.substring(0, 80),
-      minutesAgo: Math.floor((now - new Date(s.timestamp).getTime()) / 60000),
-    }))
+  // Oracles — always show all ORACLE_NAMES, even if no recent activity
+  const statusMap = new Map(statuses.map(s => [s.oracle, s]))
+  const oracles = ORACLE_NAMES.map(name => {
+    const s = statusMap.get(name)
+    return {
+      name: name.replace('-Oracle', ''),
+      status: s?.status ?? 'idle' as const,
+      group: ORACLE_GROUPS[name] || 'ops' as const,
+      lastAction: s?.lastAction?.substring(0, 80) ?? '',
+      minutesAgo: s?.lastAction ? Math.floor((now - new Date(s.timestamp).getTime()) / 60000) : -1,
+    }
+  })
 
   // Projects
   const projects = parseProjects()
@@ -80,7 +83,7 @@ export async function buildHUD(): Promise<HUDData> {
 
   const system = {
     oraclesActive: statuses.filter(s => s.status === 'active').length,
-    oraclesTotal: statuses.filter(s => s.lastAction).length,
+    oraclesTotal: ORACLE_NAMES.length,
     feedEventsToday,
     cpuPercent,
     memUsedGB: Math.round((totalmem() - freemem()) / 1073741824 * 10) / 10,
