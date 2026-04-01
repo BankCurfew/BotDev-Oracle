@@ -6,8 +6,9 @@ import { OracleAggregator } from './aggregator'
 import { extractTool } from './parser'
 import type { FeedEvent, OracleStatusEvent, FeedLogEntry } from './types'
 
-export type { FeedEvent, OracleStatusEvent, FeedLogEntry }
-export { ORACLE_NAMES } from './types'
+export type { FeedEvent, OracleStatusEvent, FeedLogEntry, OracleGroup }
+export { ORACLE_NAMES, ORACLE_GROUPS } from './types'
+export { buildContext } from './context'
 
 export interface FeedStreamCallbacks {
   onStatus: (statuses: OracleStatusEvent[]) => void
