@@ -9,6 +9,10 @@ import type { FeedEvent, OracleStatusEvent, FeedLogEntry } from './types'
 export type { FeedEvent, OracleStatusEvent, FeedLogEntry, OracleGroup }
 export { ORACLE_NAMES, ORACLE_GROUPS } from './types'
 export { buildContext } from './context'
+export { buildHUD } from './hud'
+export type { HUDData } from './hud'
+export { extractTopicSignal } from './topic-signal'
+export type { TopicSignal, PanelHint } from './topic-signal'
 
 export interface FeedStreamCallbacks {
   onStatus: (statuses: OracleStatusEvent[]) => void
