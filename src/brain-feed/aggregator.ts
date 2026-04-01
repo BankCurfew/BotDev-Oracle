@@ -1,8 +1,8 @@
 // Brain of Bank — Oracle Status Aggregator
 // Maintains per-oracle state from feed.log events
 
-import type { FeedLogEntry, OracleStatus, OracleStatusEvent } from './types'
-import { ORACLE_NAMES } from './types'
+import type { FeedLogEntry, OracleStatus, OracleStatusEvent, OracleGroup } from './types'
+import { ORACLE_NAMES, ORACLE_GROUPS } from './types'
 
 const ACTIVE_THRESHOLD_MS = 60_000   // active if event within 60s
 const BLOCKED_KEYWORDS = ['error', 'failed', 'blocked', 'BLOCKED', 'timeout', 'PostToolUseFailure']
@@ -83,6 +83,7 @@ export class OracleAggregator {
       results.push({
         oracle: state.oracle,
         status: this.getStatus(state, now),
+        group: (ORACLE_GROUPS[state.oracle] || 'ops') as OracleGroup,
         lastAction: state.lastEvent?.message || '',
         currentTask: null, // enriched later from maw
         lastMessage: null, // enriched later from threads
@@ -109,6 +110,7 @@ export class OracleAggregator {
     return {
       oracle: state.oracle,
       status: this.getStatus(state, now),
+      group: (ORACLE_GROUPS[state.oracle] || 'ops') as OracleGroup,
       lastAction: state.lastEvent?.message || '',
       currentTask: null,
       lastMessage: null,

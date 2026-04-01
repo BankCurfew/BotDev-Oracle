@@ -2,10 +2,14 @@
 
 export type OracleStatus = 'active' | 'idle' | 'blocked'
 
+/** Brain hemisphere grouping for graph visualization (Dev spec) */
+export type OracleGroup = 'dev' | 'creative' | 'ops'
+
 /** Aggregated oracle state — emitted as SSE event 'oracle-status' */
 export interface OracleStatusEvent {
   oracle: string
   status: OracleStatus
+  group: OracleGroup
   lastAction: string
   currentTask: string | null
   lastMessage: string | null
@@ -42,3 +46,23 @@ export const ORACLE_NAMES = [
 ] as const
 
 export type OracleName = typeof ORACLE_NAMES[number]
+
+/** Map oracle to brain hemisphere group */
+export const ORACLE_GROUPS: Record<string, OracleGroup> = {
+  'BoB-Oracle': 'ops',
+  'Dev-Oracle': 'dev',
+  'BotDev-Oracle': 'dev',
+  'QA-Oracle': 'dev',
+  'Admin-Oracle': 'ops',
+  'Security-Oracle': 'ops',
+  'HR-Oracle': 'ops',
+  'PA-Oracle': 'ops',
+  'Data-Oracle': 'dev',
+  'Designer-Oracle': 'creative',
+  'Writer-Oracle': 'creative',
+  'Creator-Oracle': 'creative',
+  'Editor-Oracle': 'creative',
+  'DocCon-Oracle': 'creative',
+  'Researcher-Oracle': 'dev',
+  'AIA-Oracle': 'ops',
+}
